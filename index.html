@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
 <meta charset="UTF-8">
-<title>ヘビゲーム</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Snake Game DX</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<h1>ヘビゲーム</h1>
+<div id="menu">
 
-<p>スコア：<span id="score">0</span></p>
+<h1 class="logo">🐍 SNAKE GAME DX</h1>
+
+<button onclick="startGame()">ゲームスタート</button>
+
+<button onclick="showDifficulty()">難易度</button>
+
+<button onclick="showRanking()">ランキング</button>
+
+</div>
+
+<div id="gameArea" style="display:none;">
+
+<h2>スコア：<span id="score">0</span></h2>
 
 <canvas id="game" width="400" height="400"></canvas>
+
+</div>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
