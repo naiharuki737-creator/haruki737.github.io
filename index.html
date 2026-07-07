@@ -1,40 +1,35 @@
 <!DOCTYPE html>
-<html lang="ja">
-
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Snake Game DX</title>
-
+<title>Snake Game</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<div id="menu">
+<div id="start">
+<h1>🐍 Snake Game</h1>
 
-<h1 class="logo">🐍 SNAKE GAME DX</h1>
+<select id="level">
+<option value="150">かんたん</option>
+<option value="100">ふつう</option>
+<option value="60">むずかしい</option>
+</select>
 
-<button onclick="startGame()">ゲームスタート</button>
+<br>
 
-<button onclick="showDifficulty()">難易度</button>
+<button onclick="startGame()">START</button>
 
-<button onclick="showRanking()">ランキング</button>
-
+<p>最高スコア：<span id="best">0</span></p>
 </div>
 
-<div id="gameArea" style="display:none;">
-
-<h2>スコア：<span id="score">0</span></h2>
 
 <canvas id="game" width="400" height="400"></canvas>
 
-</div>
+<h2>スコア：<span id="score">0</span></h2>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
