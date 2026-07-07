@@ -1,65 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Snake Game Ranking</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div id="start">
-
-<h1>🐍 Snake Game</h1>
-
-<p>最高のスネークプレイヤーを目指せ！</p>
-
-<select id="level">
-<option value="150">かんたん</option>
-<option value="100">ふつう</option>
-<option value="60">むずかしい</option>
-</select>
-
-<br><br>
-
-<button onclick="startGame()">START</button>
-
-<p>最高スコア：<span id="best">0</span></p>
-
-</div>
-
-
-<audio id="eatSound">
-<source src="https://actions.google.com/sounds/v1/cartoon/pop.ogg">
-</audio>
-
-<audio id="bgm" loop>
-<source src="https://actions.google.com/sounds/v1/ambiences/birds_in_forest.ogg">
-</audio>
-
-
-<canvas id="game" width="400" height="400"></canvas>
-
-
-<h2>
-スコア：
-<span id="score">0</span>
-</h2>
-
-
-<h2>🏆 オンラインランキング</h2>
-
-<ol id="ranking">
-読み込み中...
-</ol>
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
 const supabaseUrl =
 "https://moflhzgviqckxertkqce.supabase.co";
+
 
 const supabaseKey =
 "sb_publishable_7sa_ZhaXVYbm1Rt4ZRuzqg_3Z9DfKJz";
@@ -74,11 +19,29 @@ supabaseKey
 
 async function saveScore(score){
 
-let name = prompt("名前を入力してください");
+
+let name = localStorage.getItem("playerName");
+
 
 if(!name){
+
+name = prompt("名前を入力してください");
+
+
+if(!name){
+
 name="名無し";
+
 }
+
+
+localStorage.setItem(
+"playerName",
+name
+);
+
+}
+
 
 
 const {error}=await db
@@ -92,17 +55,21 @@ score:score
 
 
 if(error){
+
 console.log(error);
+
 }
 
 
 loadRanking();
+
 
 }
 
 
 
 async function loadRanking(){
+
 
 const {data,error}=await db
 .from("ranking")
@@ -111,30 +78,36 @@ const {data,error}=await db
 .limit(10);
 
 
+
 if(error){
 
 console.log(error);
-document.getElementById("ranking").innerHTML=
-"ランキング読み込み失敗";
 
 return;
 
 }
 
 
+
 let list=document.getElementById("ranking");
+
 
 list.innerHTML="";
 
 
+
 data.forEach((player,index)=>{
+
 
 let li=document.createElement("li");
 
-li.textContent=
-(index+1)+"位  "+player.name+" : "+player.score;
+
+li.textContent =
+(index+1)+"位 "+player.name+" : "+player.score;
+
 
 list.appendChild(li);
+
 
 });
 
@@ -142,13 +115,8 @@ list.appendChild(li);
 }
 
 
+
 loadRanking();
 
 
 </script>
-
-
-<script src="script.js"></script>
-
-</body>
-</html>
