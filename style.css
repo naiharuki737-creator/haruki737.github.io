@@ -1,26 +1,86 @@
 body{
 text-align:center;
 font-family:sans-serif;
-background:#222;
+background:linear-gradient(#111,#333);
 color:white;
 }
 
+
 h1{
-font-size:50px;
+font-size:60px;
+animation:title 1s infinite alternate;
 }
+
+
+@keyframes title{
+
+from{
+transform:scale(1);
+text-shadow:0 0 10px white;
+}
+
+to{
+transform:scale(1.1);
+text-shadow:0 0 30px lime;
+}
+
+}
+
+
+
+#start{
+
+margin-top:80px;
+
+}
+
+
 
 button{
-font-size:25px;
-padding:10px 40px;
+
+font-size:30px;
+padding:15px 60px;
+border-radius:20px;
+background:black;
+color:white;
+border:3px solid lime;
+cursor:pointer;
+
+animation:button 1s infinite alternate;
+
 }
+
+
+
+@keyframes button{
+
+from{
+box-shadow:0 0 5px lime;
+}
+
+to{
+box-shadow:0 0 25px lime;
+}
+
+}
+
+
 
 select{
-font-size:20px;
+
+font-size:22px;
+padding:8px;
+border-radius:10px;
+
 }
 
+
+
 #game{
+
 display:none;
 background:black;
 border:5px solid white;
 margin:auto;
+
 }
