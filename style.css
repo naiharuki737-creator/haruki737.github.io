@@ -5,24 +5,22 @@ background:#222;
 color:white;
 }
 
-#game{
-background:black;
-border:5px solid white;
-display:none;
-margin:auto;
+h1{
+font-size:50px;
 }
 
 button{
 font-size:25px;
 padding:10px 40px;
-cursor:pointer;
 }
 
 select{
 font-size:20px;
-padding:5px;
 }
 
-h1{
-font-size:50px;
+#game{
+display:none;
+background:black;
+border:5px solid white;
+margin:auto;
 }
