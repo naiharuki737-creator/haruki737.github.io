@@ -1,5 +1,5 @@
-const canvas=document.getElementById("game");
-const ctx=canvas.getContext("2d");
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
 let snake;
 let food;
@@ -51,13 +51,15 @@ y:Math.floor(Math.random()*20)*20
 
 dx=20;
 dy=0;
-score=0;
 
+score=0;
 
 document.getElementById("score").innerHTML=0;
 
 
-let speed=Number(document.getElementById("level").value);
+let speed=Number(
+document.getElementById("level").value
+);
 
 
 clearInterval(timer);
@@ -116,7 +118,10 @@ snake.unshift(head);
 
 
 
-if(head.x==food.x&&head.y==food.y){
+if(
+head.x==food.x &&
+head.y==food.y
+){
 
 score++;
 
@@ -145,16 +150,28 @@ ctx.fillStyle="lime";
 
 snake.forEach(s=>{
 
-ctx.fillRect(s.x,s.y,18,18);
+ctx.fillRect(
+s.x,
+s.y,
+18,
+18
+);
 
 });
 
 
 ctx.fillStyle="red";
 
-ctx.fillRect(food.x,food.y,18,18);
+ctx.fillRect(
+food.x,
+food.y,
+18,
+18
+);
 
 }
+
+
 
 
 
@@ -197,16 +214,32 @@ dy=0;
 
 
 
-function gameOver(){
+
+
+async function gameOver(){
 
 clearInterval(timer);
 
 sound(200,0.3);
 
 
-alert("ゲームオーバー！\nスコア："+score);
+alert(
+"ゲームオーバー！\nスコア："+score
+);
 
+
+// Supabaseへ保存
+if(typeof saveScore==="function"){
+
+saveScore(score);
+
+}
+
+
+setTimeout(()=>{
 
 location.reload();
+
+},500);
 
 }
