@@ -1,65 +1,28 @@
 body{
-
-background:#111;
-
-font-family:sans-serif;
-
 text-align:center;
-
+font-family:sans-serif;
+background:#222;
 color:white;
-
 }
 
-.logo{
-
-font-size:50px;
-
-margin-top:40px;
-
-animation:flash 2s infinite;
-
-}
-
-@keyframes flash{
-
-0%{transform:scale(1);}
-
-50%{transform:scale(1.1);}
-
-100%{transform:scale(1);}
-
+#game{
+background:black;
+border:5px solid white;
+display:none;
+margin:auto;
 }
 
 button{
-
-width:250px;
-
-padding:15px;
-
 font-size:25px;
-
-margin:15px;
-
-border:none;
-
-border-radius:15px;
-
+padding:10px 40px;
 cursor:pointer;
-
 }
 
-button:hover{
-
-transform:scale(1.05);
-
+select{
+font-size:20px;
+padding:5px;
 }
 
-canvas{
-
-background:black;
-
-border:5px solid white;
-
-margin-top:20px;
-
+h1{
+font-size:50px;
 }
