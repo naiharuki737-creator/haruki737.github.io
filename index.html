@@ -2,14 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Snake Game</title>
+<title>Snake Game Ranking</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div id="start">
+
 <h1>🐍 Snake Game</h1>
+
 <p>最高のスネークプレイヤーを目指せ！</p>
 
 <select id="level">
@@ -23,12 +25,14 @@
 <button onclick="startGame()">START</button>
 
 <p>最高スコア：<span id="best">0</span></p>
+
 </div>
 
 
 <audio id="eatSound">
 <source src="https://actions.google.com/sounds/v1/cartoon/pop.ogg">
 </audio>
+
 
 <audio id="bgm" loop>
 <source src="https://actions.google.com/sounds/v1/ambiences/birds_in_forest.ogg">
@@ -37,10 +41,106 @@
 
 <canvas id="game" width="400" height="400"></canvas>
 
-<h2>スコア：<span id="score">0</span></h2>
+
+<h2>
+スコア：
+<span id="score">0</span>
+</h2>
+
+
+<h2>🏆 オンラインランキング</h2>
+
+<ol id="ranking">
+読み込み中...
+</ol>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+const supabaseUrl =
+"https://moflhzgviqckxertkqce.supabase.co";
+
+
+const supabaseKey =
+"ここにPublishable key";
+
+
+const db = supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+
+async function saveScore(score){
+
+let name = prompt("名前を入力してください");
+
+if(!name) name="名無し";
+
+
+await db
+.from("scores")
+.insert([
+{
+name:name,
+score:score
+}
+]);
+
+
+loadRanking();
+
+}
+
+
+
+async function loadRanking(){
+
+const {data,error}=await db
+.from("scores")
+.select("*")
+.order("score",{ascending:false})
+.limit(10);
+
+
+if(error){
+console.log(error);
+return;
+}
+
+
+let list=document.getElementById("ranking");
+
+list.innerHTML="";
+
+
+data.forEach((player)=>{
+
+let li=document.createElement("li");
+
+li.textContent=
+player.name+" : "+player.score;
+
+
+list.appendChild(li);
+
+});
+
+
+}
+
+
+loadRanking();
+
+
+</script>
 
 
 <script src="script.js"></script>
+
 
 </body>
 </html>
