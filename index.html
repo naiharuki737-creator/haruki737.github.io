@@ -33,7 +33,6 @@
 <source src="https://actions.google.com/sounds/v1/cartoon/pop.ogg">
 </audio>
 
-
 <audio id="bgm" loop>
 <source src="https://actions.google.com/sounds/v1/ambiences/birds_in_forest.ogg">
 </audio>
@@ -57,12 +56,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script>
 
 const supabaseUrl =
 "https://moflhzgviqckxertkqce.supabase.co";
-
 
 const supabaseKey =
 "sb_publishable_7sa_ZhaXVYbm1Rt4ZRuzqg_3Z9DfKJz";
@@ -74,21 +71,29 @@ supabaseKey
 );
 
 
+
 async function saveScore(score){
 
 let name = prompt("名前を入力してください");
 
-if(!name) name="名無し";
+if(!name){
+name="名無し";
+}
 
 
-await db
-.from("scores")
+const {error}=await db
+.from("ranking")
 .insert([
 {
 name:name,
 score:score
 }
 ]);
+
+
+if(error){
+console.log(error);
+}
 
 
 loadRanking();
@@ -100,15 +105,20 @@ loadRanking();
 async function loadRanking(){
 
 const {data,error}=await db
-.from("scores")
+.from("ranking")
 .select("*")
 .order("score",{ascending:false})
 .limit(10);
 
 
 if(error){
+
 console.log(error);
+document.getElementById("ranking").innerHTML=
+"ランキング読み込み失敗";
+
 return;
+
 }
 
 
@@ -117,13 +127,12 @@ let list=document.getElementById("ranking");
 list.innerHTML="";
 
 
-data.forEach((player)=>{
+data.forEach((player,index)=>{
 
 let li=document.createElement("li");
 
 li.textContent=
-player.name+" : "+player.score;
-
+(index+1)+"位  "+player.name+" : "+player.score;
 
 list.appendChild(li);
 
@@ -140,7 +149,6 @@ loadRanking();
 
 
 <script src="script.js"></script>
-
 
 </body>
 </html>
